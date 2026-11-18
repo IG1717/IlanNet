@@ -16,9 +16,7 @@ static void randomize_weights(layer_t *layer) {
   }
 }
 
-static float get_weight(const layer_t *layer, int node, int in) {
-  return layer->W[node * layer->n_in + in];
-}
+static float get_weight(const layer_t *layer, int node, int in) { return layer->W[node * layer->n_in + in]; }
 
 static float sigmoid(float x) { return (1 / (1 + expf(-1 * x))); }
 
@@ -26,9 +24,7 @@ int build_layer(layer_t *layer, int n_in, int n_out) {
   layer->n_in = n_in;
   layer->n_out = n_out;
 
-  layer->W = malloc(
-      n_in * n_out *
-      sizeof(float)); // Creates array to store all weights for this layer
+  layer->W = malloc(n_in * n_out * sizeof(float)); // Creates array to store all weights for this layer
 
   if (layer->W == NULL) {
     return 1;
@@ -56,22 +52,10 @@ void layer_forward(layer_t *layer, const float *input) {
   for (int i = 0; i < layer->n_out; i++) {
     layer->z[i] = layer->b[i]; // Set each node equal to its bias
     for (int j = 0; j < layer->n_in; j++) {
-      layer->z[i] +=
-          input[j] *
-          get_weight(layer, i,
-                     j); // Multiply each input by corresponding weight
+      layer->z[i] += input[j] * get_weight(layer, i,
+                                           j); // Multiply each input by corresponding weight
     }
     layer->a[i] = sigmoid(layer->z[i]);
-  }
-}
-
-void forward_pass(layer_t *layers, int n_layers, const float *input) {
-  for (int i = 0; i < n_layers; i++) {
-    if (i == 0) {
-      layer_forward(&layers[i], input);
-    } else {
-      layer_forward(&layers[i], layers[i - 1].a);
-    }
   }
 }
 

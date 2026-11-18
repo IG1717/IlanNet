@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -g
-SRCS = main.c layer.c
+SRCS = main.c layer.c network.c
 HDRS = layer.h
 
 nn: $(SRCS) $(HDRS)
