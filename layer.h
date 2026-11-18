@@ -16,3 +16,10 @@ typedef struct layer {
  * \return 0 on success, 1 on failure
  */
 int build_layer(layer_t *layer, int n_in, int n_out);
+
+/**
+ * Function to free the memory allocated to a layer
+ *
+ * \param layer - pointer to layer with memory to be freed
+ */
+void free_layer(layer_t *layer);
