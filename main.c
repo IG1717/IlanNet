@@ -13,10 +13,9 @@ int main(void) {
 
   float inputs[4][2] = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
 
-  for (int k = 0; k < 4; k++) {
-    forward_pass(&net, inputs[k]);
-    printf("%.0f %.0f -> %f\n", inputs[k][0], inputs[k][1], net.layers[1].a[0]);
-  }
+  float targets[4] = {0, 1, 1, 0};
+
+  train(&net, &inputs, &targets, 4, 10, 1);
 
   free_network(&net);
   return 0;

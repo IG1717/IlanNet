@@ -1,10 +1,13 @@
 typedef struct layer {
-  int n_in;  // Number of input nodes to this layer
-  int n_out; // Number of nodes in this layer
-  float *W;  // Weights inside the layer
-  float *b;  // Offsets of each node
-  float *z;  // rawsum of each node
-  float *a;  // sum of each node after activation function applied
+  int n_in;      // Number of input nodes to this layer
+  int n_out;     // Number of nodes in this layer
+  float *W;      // Weights inside the layer
+  float *b;      // Offsets of each node
+  float *z;      // rawsum of each node
+  float *a;      // sum of each node after activation function applied
+  float *delta;  // error term
+  float *grad_W; // weight gradient
+  float *grad_b; // bias gradient
 } layer_t;
 
 /**
@@ -24,4 +27,11 @@ int build_layer(layer_t *layer, int n_in, int n_out);
  */
 void free_layer(layer_t *layer);
 
+/**
+ * Function to run inputs through a forward pass of layer
+ *
+ * \param layer - pointer to layer to run the pass through
+ * \param input - pointer to the input to run through the layer
+ *
+ */
 void layer_forward(layer_t *layer, const float *input);

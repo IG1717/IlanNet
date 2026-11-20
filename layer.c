@@ -45,6 +45,21 @@ int build_layer(layer_t *layer, int n_in, int n_out) {
     return 1;
   }
 
+  layer->delta = calloc(n_out, sizeof(float));
+  if (layer->delta == NULL) {
+    return 1;
+  }
+
+  layer->grad_W = calloc(n_in * n_out, sizeof(float));
+  if (layer->grad_W == NULL) {
+    return 1;
+  }
+
+  layer->grad_b = calloc(n_out, sizeof(float));
+  if (layer->grad_b == NULL) {
+    return 1;
+  }
+
   return 0;
 }
 
@@ -64,4 +79,7 @@ void free_layer(layer_t *layer) {
   free(layer->b);
   free(layer->z);
   free(layer->a);
+  free(layer->delta);
+  free(layer->grad_b);
+  free(layer->grad_W);
 }

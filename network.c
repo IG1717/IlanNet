@@ -34,3 +34,21 @@ void forward_pass(network_t *net, float *input) {
     }
   }
 }
+
+void backward_pass(network_t *net, float *input, float *target) {
+  for (int i = net->n_layers; i > 0; i--) { // Loop backward from the last layer
+    continue;
+  }
+}
+
+void train(network_t *net, float *inputs, float *targets, int n_examples, int epochs, float learning_rate) {
+  int n_in = net->layers[0].n_in;                   // Number of inputs to the network
+  int n_out = net->layers[net->n_layers - 1].n_out; // Number of outputs of the network
+
+  for (int i = 0; i < epochs; i++) {
+    for (int j = 0; j < n_examples; j++) {
+      forward_pass(net, &inputs[j * n_in]);
+      backward_pass(net, &inputs[j * n_in], &targets[j * n_out]);
+    }
+  }
+}
